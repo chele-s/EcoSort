@@ -369,6 +369,7 @@ Elías Bautista
 
 ## Licencia
 
+<<<<<<< HEAD
 Este proyecto está licenciado bajo la Licencia MIT.
 
 Copyright (c) 2025 Gabriel Calderón, Elias Bautista, Cristian Hernandez.
@@ -378,6 +379,10 @@ Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
 El aviso de copyright anterior y este aviso de permiso se incluirán en todas las copias o partes sustanciales del Software.
 
 EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS AUTORES O TITULARES DEL COPYRIGHT SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRO MODO, DERIVADA DE, FUERA DE O EN CONEXIÓN CON EL SOFTWARE O EL USO U OTRAS OPERACIONES EN EL SOFTWARE.
+=======
+MIT
+
+>>>>>>> 475d6d47aef12bc703f8be2ceaff437b6368fd8e
 
 ---
 *Junio de 2025* 
