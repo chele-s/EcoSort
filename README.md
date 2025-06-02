@@ -215,7 +215,8 @@ Este proyecto ha sido desarrollado como parte de los requisitos para las siguien
 
 ## Licencia
 
-(Considera añadir una licencia si es apropiado, ej: MIT, Apache 2.0)
+MIT
+
 
 ---
 *Junio de 2025* 
