@@ -1,0 +1,56 @@
+# Entornos virtuales de Python
+venv/
+*.venv/
+ENV/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de base de datos SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de configuración local (si los tienes)
+# config_local.json
+
+# Logs
+*.log
+logs/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Datasets grandes (si no quieres subirlos a Git)
+# IA_Clasificacion/dataset_basura/images/
+# IA_Clasificacion/dataset_basura/labels/
+
+# Modelos de IA entrenados (pueden ser grandes)
+IA_Clasificacion/models/*.pt
+IA_Clasificacion/models/*.weights
+
+# Directorios de Ultralytics/YOLO (runs)
+runs/
+
+# Capturas de imágenes y videos
+captures/
+
+# Reportes generados
+reports/
+
+# Exportaciones de datos de la API
+exports/
+
+# Archivos temporales de prueba específicos del proyecto
+config_industrial_test.json
+config_industrial_belt_test.json
+config_industrial_sensors_test.json 

@@ -1,0 +1,10 @@
+opencv-python-headless
+RPI.GPIO
+pymodbus
+Flask
+Flask-SocketIO
+Flask-CORS
+ultralytics
+PyYAML
+# Asegúrate de que la versión de ultralytics sea compatible con YOLOv12 o el modelo que uses.
+# Considera fijar versiones para mayor reproducibilidad, ej: Flask==2.0.1

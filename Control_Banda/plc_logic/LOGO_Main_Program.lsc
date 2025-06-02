@@ -1,0 +1,104 @@
+(*
+    Archivo: LOGO_Main_Program.lsc
+    Proyecto: EcoSort Industrial - Sistema de Clasificación de Residuos
+    Autor(es): [Tu Nombre/Equipo]
+    Fecha: Junio 2025
+
+    Descripción:
+    Este archivo contiene el programa principal para el PLC Siemens LOGO! 
+    utilizado en el sistema de clasificación de residuos EcoSort Industrial.
+
+    Funcionalidades Principales del PLC:
+    1.  Control de la Banda Transportadora:
+        -   Arranque y parada de la banda (puede ser por señal de RPi o panel local).
+        -   Control de velocidad de la banda (si el PLC lo gestiona).
+        -   Señal de estado de la banda (corriendo/parada) a la RPi.
+
+    2.  Control de Actuadores de Desviación:
+        -   Recepción de comandos desde la Raspberry Pi (vía Modbus TCP/IP) para activar 
+            desviadores específicos (ej: Metal, Plástico, Vidrio, Cartón).
+        -   Gestión del tiempo de activación de cada actuador (pulso o mantener señal).
+        -   Manejo de la lógica para que solo un actuador esté activo a la vez (si es necesario).
+        -   Posibles señales de retroalimentación del estado de los actuadores a la RPi (si los actuadores lo permiten).
+
+    3.  Parada de Emergencia:
+        -   Lógica para detener inmediatamente todos los movimientos (banda y actuadores)
+            al recibir una señal de parada de emergencia (local o desde RPi).
+
+    4.  Comunicación Modbus TCP/IP con Raspberry Pi:
+        -   Definición de los registros Modbus (Coils, Input Registers, Holding Registers)
+            utilizados para la comunicación.
+        -   Servidor Modbus TCP/IP activo en el PLC.
+
+    Ejemplo de Mapeo de Registros Modbus (referenciar con rpi_plc_interface.py):
+    -   Coils (Escritura desde RPi):
+        -   0: Activar Actuador Metal
+        -   1: Activar Actuador Plástico
+        -   2: Activar Actuador Vidrio
+        -   3: Activar Actuador Cartón (si hay uno más)
+        -   10: Arrancar Banda
+        -   11: Parar Banda
+        -   20: Parada de Emergencia (activada por RPi)
+
+    -   Input Registers (Lectura por RPi):
+        -   0: Estado General del PLC (ej: 0=OK, 1=Error)
+        -   1: Estado de Actuadores (podría ser un bitmap)
+        -   2: Velocidad Actual de la Banda (si controlada por PLC y legible)
+        -   3: Código de Error del PLC
+        -   4: Contador de Productos (si el PLC lo lleva)
+
+    -   Holding Registers (Lectura/Escritura por RPi - para configuración):
+        -   10: Tiempo de Activación de Actuador (ms) - configurado por RPi
+        -   11: Tiempo de Retardo/Delay general (ms) - configurado por RPi
+        -   12: Setpoint de Velocidad de Banda (%) - configurado por RPi
+
+    Consideraciones:
+    -   Utilizar bloques de función estándar y/o UDFs para modularizar el código.
+    -   Asegurar una lógica robusta para el manejo de errores y estados seguros.
+    -   Comentar adecuadamente el código dentro del entorno de programación del PLC (LOGO! Soft Comfort).
+
+    Nota: Este archivo .lsc es un formato de Siemens. El contenido aquí es una 
+    descripción conceptual de la lógica que se implementaría usando el software LOGO! Soft Comfort.
+*)
+
+NETWORK 1 // Ejemplo de Red - Inicialización y Parada de Emergencia
+TITLE "Inicialización y Parada de Emergencia"
+
+// Lógica para la parada de emergencia (ejemplo conceptual)
+// I1: Botón de Parada de Emergencia Físico (Normalmente Cerrado)
+// M1: Bit de Parada de Emergencia desde RPi (Coil 20)
+// Q1: Salida para Relé de Seguridad General
+
+//      I1     M1
+// |----|/|--| |--()-- Q1
+//             (Parada Emergencia)
+
+NETWORK 2 // Control de Banda
+TITLE "Control de Banda Transportadora"
+
+// M10: Comando Arranque Banda desde RPi (Coil 10)
+// M11: Comando Parada Banda desde RPi (Coil 11)
+// Q_Banda: Salida física para el contactor de la banda
+
+//      M10    Q_Banda
+// |----| |--()-- Q_Banda
+// |
+// | M11 Q_Banda
+// |----|/|--|
+
+NETWORK 3 // Control Actuador Metal
+TITLE "Control Actuador Metal"
+
+// M0: Comando Activar Metal desde RPi (Coil 0)
+// T0: Temporizador para duración de activación (configurado por HR10)
+// Q_Metal: Salida física para actuador Metal
+
+//      M0     T0.Q    Q_Metal
+// |----| |----|/|--()-- Q_Metal
+// |
+// | M0
+// |----| |----(TON T0, PT=HR10)---
+
+// ... Redes similares para Plástico, Vidrio, Cartón ...
+
+END
