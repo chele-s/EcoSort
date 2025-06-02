@@ -9,6 +9,8 @@
    ░  ░    ░                 ░  ░   ░        ░     ░      ░  ░ 
            ░                                  ░                 
 
+![EcoSort Industrial Banner](https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?q=80&w=2070&auto=format&fit=crop&ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
 # EcoSort Industrial - Sistema de Clasificación de Residuos v1.0
 
 ## Descripción General
@@ -23,6 +25,133 @@ Este proyecto está diseñado como una solución integral que incluye:
 *   **Interfaz de Usuario y Monitoreo Remoto:** Proporciona una API RESTful y WebSockets (construida con Flask y Flask-SocketIO) para el monitoreo en tiempo real, visualización de estadísticas, y control básico del sistema desde una interfaz web.
 *   **Registro y Análisis de Datos:** Almacena datos de clasificación, eventos del sistema y estadísticas de operación en una base de datos SQLite para análisis y generación de reportes.
 
+## Planteamiento del Problema
+
+*   En la actualidad, la gestión eficiente de residuos sólidos, especialmente a nivel industrial y en plantas de reciclaje, presenta desafíos significativos en El Salvador y a nivel global. Los procesos de clasificación manual son intensivos en mano de obra, costosos, lentos y pueden exponer a los trabajadores a condiciones insalubres o peligrosas. Además, la clasificación manual a menudo resulta en una menor pureza de los materiales recuperados, lo que disminuye su valor y la eficiencia general del reciclaje. La acumulación de desechos sin una segregación adecuada contribuye a la contaminación ambiental y a la pérdida de recursos valiosos que podrían ser reincorporados a la cadena productiva. Existe una necesidad apremiante de implementar tecnologías de automatización avanzadas que puedan optimizar estos procesos, incrementando la velocidad, precisión y seguridad en la clasificación de desechos industriales, fomentando así una economía circular más efectiva. Este proyecto busca abordar la ineficiencia y los altos costos asociados con la clasificación manual de residuos en flujos industriales, mediante la aplicación de visión artificial e inteligencia artificial en un sistema de banda transportadora.
+
+## Objetivos
+
+### Objetivo General
+
+*   Desarrollar e implementar un prototipo funcional de un sistema automatizado para la clasificación inteligente de desechos (Metal, Vidrio, Plástico, Cartón) en una banda transportadora de escala de laboratorio, utilizando visión por computadora y un modelo de redes neuronales convolucionales (YOLO), orientado a mejorar la eficiencia en procesos industriales de reciclaje.
+
+### Objetivos Específicos
+
+*   Diseñar y construir un prototipo físico de una banda transportadora equipada con un sistema de captura de imágenes (cámara y sistema de iluminación controlada) y mecanismos de desviación para cuatro tipos de desechos.
+
+*   Crear un conjunto de datos (dataset) de imágenes representativo de los desechos a clasificar (Metal, Vidrio, Plástico, Cartón) en condiciones similares a las de la banda transportadora.
+
+*   Entrenar, validar y optimizar un modelo de red neuronal convolucional (YOLO) capaz de identificar y clasificar los tipos de desechos definidos con un nivel de precisión aceptable en tiempo real o cuasi real.
+
+*   Desarrollar un sistema de control (utilizando una Raspberry Pi 5 como unidad central de procesamiento) que integre la captura de imágenes, la inferencia del modelo de IA y la activación sincronizada de los mecanismos de desviación en función de la clasificación obtenida y el movimiento de la banda.
+
+*   Implementar la lógica de sincronización necesaria para asegurar que los actuadores de desviación se activen en el momento preciso en que el objeto clasificado llega al punto de segregación correspondiente en la banda transportadora.
+
+*   Evaluar el rendimiento del prototipo en términos de precisión de clasificación, velocidad de procesamiento (objetos por minuto) y efectividad de la desviación física bajo condiciones controladas de laboratorio.
+
+
+
+## Justificación
+
+*   Este proyecto posee una relevancia significativa desde múltiples perspectivas:
+
+Relevancia Tecnológica: Aplica tecnologías de vanguardia como la inteligencia artificial (específicamente redes neuronales convolucionales como YOLO) y la visión por computadora a un problema industrial concreto y actual. La integración de estos componentes en un sistema de banda transportadora para la clasificación autónoma representa una innovación en el campo de la automatización industrial y la robótica aplicada.
+
+Relevancia Industrial y Económica: La automatización de la clasificación de residuos tiene el potencial de transformar las operaciones en plantas de reciclaje y centros de gestión de desechos. Puede conducir a una reducción significativa de los costos operativos (asociados a la mano de obra y a errores de clasificación), un aumento en la eficiencia y velocidad del proceso, y una mejora en la calidad (pureza) de los materiales recuperados, lo que incrementa su valor en el mercado. Esto es particularmente importante para la industria del reciclaje en El Salvador, donde la optimización de costos y la eficiencia son clave.
+
+Relevancia Social y Ambiental: Al mejorar la eficiencia del reciclaje, el proyecto contribuye directamente a la reducción de la cantidad de residuos que terminan en vertederos, mitigando el impacto ambiental asociado. Fomenta la transición hacia una economía circular, donde los materiales se reutilizan y reciclan en lugar de desecharse. Además, la automatización de tareas de clasificación, que a menudo son repetitivas y pueden ser insalubres o peligrosas, puede mejorar las condiciones laborales de los trabajadores del sector.
+
+Relevancia Académica: El desarrollo de este proyecto proporcionará un caso de estudio práctico y valioso sobre la aplicación de técnicas avanzadas de ingeniería de software, hardware e inteligencia artificial. Generará conocimiento aplicable y servirá como base para futuras investigaciones y desarrollos en el área de la automatización industrial y la gestión inteligente de residuos en el contexto local y regional.
+
+## Alcance y Limitaciones
+
+### Alcance
+
+*   Desarrollo de Prototipo: Se construirá un prototipo funcional a escala de laboratorio de un sistema de banda transportadora con capacidad de clasificación automatizada.
+
+Tipos de Residuos: El sistema se enfocará en la clasificación de cuatro categorías principales de desechos predefinidos: Metal, Vidrio, Plástico y Cartón.
+
+Condiciones de Operación: Los objetos se introducirán en la banda de forma individual o con una separación suficiente para permitir su identificación y clasificación individual por el sistema de visión.
+
+Componentes Clave: El proyecto cubrirá el diseño e implementación del sistema de visión (cámara, iluminación), el desarrollo y entrenamiento del modelo de IA, la programación del sistema de control en la Raspberry Pi 5, el diseño y control de los mecanismos de desviación física, y la lógica de sincronización entre estos componentes.
+
+Rendimiento: Se buscará una clasificación y desviación en tiempo real o cuasi real, adecuada para la velocidad de la banda del prototipo.
+
+Interfaz de Usuario: Será una interfaz básica para el monitoreo del estado del sistema y visualización de estadísticas de clasificación.
+
+Plataforma de Control: El control principal y el procesamiento de IA se realizarán en una Raspberry Pi 5. La interacción con actuadores y sensores se gestionará mediante sus pines GPIO y los scripts de Python desarrollados (motor_driver_interface.py, sensor_interface.py, conveyor_belt_controller.py).
+
+### Limitaciones
+
+*   Escala del Prototipo: El sistema desarrollado será un prototipo de laboratorio y no una máquina de grado industrial lista para producción masiva o despliegue inmediato en una planta.
+
+Variabilidad del Dataset: Aunque se buscará un dataset representativo, este será limitado en comparación con la inmensa variabilidad (formas, tamaños, niveles de suciedad, deformaciones, objetos mezclados) de los residuos en un flujo industrial real.
+
+Condiciones Ambientales: El rendimiento se evaluará bajo condiciones de iluminación controlada en el laboratorio. Variaciones extremas de luz o la presencia de polvo y vibraciones en un entorno industrial real podrían afectar el desempeño y no serán exhaustivamente abordadas.
+
+Manejo de Objetos Complejos: El sistema no está diseñado para manejar objetos fuertemente adheridos, superpuestos, excesivamente sucios, o residuos peligrosos/especiales no contemplados en las categorías definidas.
+
+Análisis Exhaustivo: No se incluirá un análisis de costos detallado para la implementación industrial a gran escala, ni pruebas de durabilidad a largo plazo de los componentes mecánicos.
+
+Recursos Computacionales: El procesamiento de IA estará limitado por la capacidad de la Raspberry Pi 5. No se explorarán soluciones basadas en GPUs de alto rendimiento o procesamiento en la nube, a menos que se especifique como una línea de trabajo futuro.
+
+Tiempo y Presupuesto: El desarrollo estará restringido por el cronograma académico y los recursos económicos disponibles para el proyecto de tesis.
+
+## Metodología
+
+*   La metodología para el desarrollo de este proyecto se basará en un enfoque de investigación aplicada y desarrollo tecnológico experimental, siguiendo las siguientes fases:
+
+Fase de Investigación y Planificación:
+
+Revisión bibliográfica exhaustiva sobre sistemas de clasificación de residuos, visión por computadora, redes neuronales convolucionales (especialmente YOLO), control de bandas transportadoras y automatización industrial.
+
+Definición detallada de los requisitos funcionales y técnicos del sistema.
+
+Selección de componentes de hardware (cámara, Raspberry Pi 5, tipo de banda, motores para la banda y desviadores, drivers, sensores de disparo y de nivel, materiales para la estructura).
+
+Diseño conceptual del sistema mecánico y electrónico.
+
+Planificación detallada del proyecto, incluyendo cronograma y asignación de tareas.
+
+Fase de Diseño y Desarrollo de Hardware:
+
+Diseño detallado (CAD si es posible) de la estructura de la banda transportadora, los mecanismos de desviación (ej: compuertas accionadas por motores a pasos o solenoides) y el sistema de montaje para la cámara y la iluminación.
+
+Ensamblaje físico del prototipo de la banda transportadora y los mecanismos de desviación.
+
+Integración de la cámara, el sistema de iluminación, la Raspberry Pi 5, los drivers de motor, y los sensores (sensor de disparo para la cámara, sensores de nivel para las tolvas de destino).
+
+Cableado y pruebas iniciales de cada componente de hardware.
+
+Fase de Desarrollo de Software:
+
+Módulo de Inteligencia Artificial (IA_Clasificacion):
+
+Recolección y preprocesamiento de un conjunto de datos de imágenes de los residuos objetivo (Metal, Vidrio, Plástico, Cartón).
+
+Anotación de las imágenes para el entrenamiento del modelo YOLO.
+
+Entrenamiento, validación y ajuste fino del modelo YOLO utilizando Python y librerías como PyTorch/TensorFlow y OpenCV.
+
+Desarrollo de TrashDetect.py para la inferencia en tiempo real.
+
+Módulos de Control de Bajo Nivel (Control_Banda/RPi_control_bajo_nivel):
+
+Desarrollo de sensor_interface.py para leer el sensor de disparo de la cámara y los sensores de nivel de las tolvas.
+
+Desarrollo de motor_driver_interface.py para controlar los actuadores de los mecanismos de desviación.
+
+Desarrollo de conveyor_belt_controller.py para el encendido/apagado y (opcionalmente) control de velocidad de la banda principal.
+
+Orquestador Principal (main_sistema_banda.py):
+
+Desarrollo de la lógica principal que integra la captura de imágenes (activada por el sensor de disparo), la llamada al módulo de IA para clasificación, y la crucial lógica de sincronización para activar el motor_driver_interface.py en el momento exacto en que el objeto clasificado llega al desviador correspondiente. Este cálculo considerará la velocidad de la banda y la distancia cámara-desviador.
+
+Implementación de la gestión de la cola de objetos (object_queue) y el manejo de hilos (threading) para procesar múltiples objetos en la banda.
+
+Módulo de Comunicación (Comunicacion/rpi_plc_interface.py): Si se opta por una arquitectura híbrida con un PLC (ej: Siemens LOGO!), se desarrollará la comunicación (ej: Modbus TCP) entre la Raspberry Pi y el PLC.
+
+Interfaz de Usuario (InterfazUsuario_Monitoreo): Desarrollo de la aplicación web (Flask backend, React/Vite frontend) para visualización y monitoreo.
 ## Arquitectura del Sistema
 
 El sistema se compone de los siguientes módulos principales:
@@ -207,6 +336,31 @@ Este proyecto ha sido desarrollado como parte de los requisitos para las siguien
 *   Laboratorio de Creatividad III
 *   Trabajo de Graduación
 
+# Agradecimientos
+
+Deseamos expresar nuestro más sincero agradecimiento a todas aquellas personas e instituciones que, de una u otra forma, contribuyeron al desarrollo y culminación de este proyecto de tesis. Su apoyo ha sido fundamental en cada etapa de esta investigación.
+
+En primer lugar, extendemos un especial agradecimiento a nuestro asesor de tesis, Ing. Melquisidec Pérez Ramírez, por su invaluable guía, paciencia y sabios consejos a lo largo de todo este proceso. Su experiencia y disposición para resolver nuestras dudas fueron cruciales para superar los desafíos encontrados y para orientar nuestro trabajo hacia los objetivos propuestos.
+
+Agradecemos a la Colegio Español Padre Arrupe por brindarnos la formación académica y los recursos necesarios que sentaron las bases para la realización de este proyecto. Asimismo, a los docentes de Electronica III, quienes compartieron sus conocimientos y nos motivaron a explorar el fascinante campo de la inteligencia artificial y la automatización industrial.
+
+Un reconocimiento especial a nuestros compañeros de equipo, por su dedicación, esfuerzo conjunto y el excelente ambiente de colaboración que mantuvimos durante el desarrollo de este proyecto. Las largas horas de trabajo, las discusiones constructivas y el apoyo mutuo fueron esenciales para alcanzar nuestras metas.
+
+A nuestras familias, por su comprensión, amor incondicional y constante aliento, especialmente en los momentos de mayor exigencia. Su fe en nosotros fue una fuente de motivación invaluable.
+
+A nuestros amigos y compañeros de clase, por su camaradería, por compartir ideas y por el apoyo moral ofrecido durante este retador pero gratificante camino.
+
+Finalmente, agradecemos a cualquier otra persona que, aunque no haya sido mencionada explícitamente, haya aportado de alguna manera al desarrollo de esta tesis.
+
+Este logro es el resultado del esfuerzo y la colaboración de muchas personas, y a todas ellas, les dedicamos este trabajo.
+
+¡Muchas gracias!
+
+Cristian Hernández
+Gabriel Calderón
+Elías Bautista
+
+
 ## Autores
 
 *   Gabriel Calderón
@@ -215,7 +369,15 @@ Este proyecto ha sido desarrollado como parte de los requisitos para las siguien
 
 ## Licencia
 
-(Considera añadir una licencia si es apropiado, ej: MIT, Apache 2.0)
+Este proyecto está licenciado bajo la Licencia MIT.
+
+Copyright (c) 2025 Gabriel Calderón, Elias Bautista, Cristian Hernandez.
+
+Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia de este software y de los archivos de documentación asociados (el "Software"), para tratar el Software sin restricciones, incluyendo, sin limitación, los derechos de uso, copia, modificación, fusión, publicación, distribución, sublicencia y/o venta de copias del Software, y para permitir a las personas a las que se les proporcione el Software hacerlo, sujeto a las siguientes condiciones:
+
+El aviso de copyright anterior y este aviso de permiso se incluirán en todas las copias o partes sustanciales del Software.
+
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS AUTORES O TITULARES DEL COPYRIGHT SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRO MODO, DERIVADA DE, FUERA DE O EN CONEXIÓN CON EL SOFTWARE O EL USO U OTRAS OPERACIONES EN EL SOFTWARE.
 
 ---
 *Junio de 2025* 
