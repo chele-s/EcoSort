@@ -148,7 +148,7 @@ sudo raspi-config
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/tu-usuario/EcoSort-Industrial.git
+git clone https://github.com/chele-s/EcoSort-Industrial.git
 cd EcoSort-Industrial
 
 # Crear entorno virtual
@@ -766,7 +766,7 @@ EcoSort-Industrial/
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/tu-usuario/EcoSort-Industrial.git
+git clone https://github.com/chele-s/EcoSort-Industrial.git
 cd EcoSort-Industrial
 
 # Crear entorno de desarrollo
@@ -867,7 +867,7 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 ## 🙏 Agradecimientos
 
 - **Comunidad Open Source** por las librerías utilizadas
-- **Ultralytics** por YOLOv8 y documentación excelente
+- **Ultralytics** por YOLOv12 y documentación excelente
 - **OpenCV Community** por las herramientas de visión computacional
 - **Raspberry Pi Foundation** por el hardware accesible
 - **Flask & SocketIO** por la infraestructura web
@@ -877,14 +877,14 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 ## 📞 Soporte y Contacto
 
 ### Documentación Adicional
-- [Wiki del Proyecto](https://github.com/tu-usuario/EcoSort-Industrial/wiki)
+- [Wiki del Proyecto](https://github.com/chele-s/EcoSort-Industrial/wiki)
 - [Guía de Instalación Detallada](docs/installation_guide.md)
 - [Manual de Usuario](docs/user_manual.md)
 - [Documentación de API](docs/api_documentation.md)
 
 ### Reportar Problemas
-- [Issues de GitHub](https://github.com/tu-usuario/EcoSort-Industrial/issues)
-- [Discusiones](https://github.com/tu-usuario/EcoSort-Industrial/discussions)
+- [Issues de GitHub](https://github.com/chele-s/EcoSort-Industrial/issues)
+- [Discusiones](https://github.com/chele-s/EcoSort-Industrial/discussions)
 
 ### Comunidad
 - [Discord Server](https://discord.gg/ecosort)
@@ -896,9 +896,9 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 
 **⭐ Si este proyecto te resulta útil, considera darle una estrella en GitHub ⭐**
 
-![GitHub stars](https://img.shields.io/github/stars/tu-usuario/EcoSort-Industrial?style=social)
-![GitHub forks](https://img.shields.io/github/forks/tu-usuario/EcoSort-Industrial?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/tu-usuario/EcoSort-Industrial?style=social)
+![GitHub stars](https://img.shields.io/github/stars/chele-s/EcoSort-Industrial?style=social)
+![GitHub forks](https://img.shields.io/github/forks/chele-s/EcoSort-Industrial?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/chele-s/EcoSort-Industrial?style=social)
 
 **Hecho con ❤️ para un futuro más limpio y sostenible**
 
