@@ -731,7 +731,7 @@ jobs:
 ### Estructura del Proyecto
 
 ```
-EcoSort-Industrial/
+EcoSort/
 ├── main_sistema_banda.py          # Sistema principal mejorado
 ├── Control_Banda/
 │   ├── config_industrial.json     # Configuración principal v2.1
@@ -766,8 +766,8 @@ EcoSort-Industrial/
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/chele-s/EcoSort-Industrial.git
-cd EcoSort-Industrial
+git clone https://github.com/chele-s/EcoSort.git
+cd EcoSort
 
 # Crear entorno de desarrollo
 python -m venv dev_env
@@ -877,14 +877,14 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 ## 📞 Soporte y Contacto
 
 ### Documentación Adicional
-- [Wiki del Proyecto](https://github.com/chele-s/EcoSort-Industrial/wiki)
+- [Wiki del Proyecto](https://github.com/chele-s/EcoSort/wiki)
 - [Guía de Instalación Detallada](docs/installation_guide.md)
 - [Manual de Usuario](docs/user_manual.md)
 - [Documentación de API](docs/api_documentation.md)
 
 ### Reportar Problemas
-- [Issues de GitHub](https://github.com/chele-s/EcoSort-Industrial/issues)
-- [Discusiones](https://github.com/chele-s/EcoSort-Industrial/discussions)
+- [Issues de GitHub](https://github.com/chele-s/EcoSort/issues)
+- [Discusiones](https://github.com/chele-s/EcoSort/discussions)
 
 ### Comunidad
 - [Discord Server](https://discord.gg/ecosort)
@@ -896,9 +896,9 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 
 **⭐ Si este proyecto te resulta útil, considera darle una estrella en GitHub ⭐**
 
-![GitHub stars](https://img.shields.io/github/stars/chele-s/EcoSort-Industrial?style=social)
-![GitHub forks](https://img.shields.io/github/forks/chele-s/EcoSort-Industrial?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/chele-s/EcoSort-Industrial?style=social)
+![GitHub stars](https://img.shields.io/github/stars/chele-s/EcoSort?style=social)
+![GitHub forks](https://img.shields.io/github/forks/chele-s/EcoSort?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/chele-s/EcoSort?style=social)
 
 **Hecho con ❤️ para un futuro más limpio y sostenible**
 
