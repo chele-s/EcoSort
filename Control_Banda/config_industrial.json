@@ -1,39 +1,128 @@
 {
+    "version": "2.1",
+    "metadata": {
+        "description": "Configuración avanzada para EcoSort Industrial v2.1",
+        "last_updated": "2024-12-20",
+        "config_version": "2.1.0",
+        "author": "EcoSort Team",
+        "compatibility": {
+            "min_software_version": "2.1.0",
+            "max_software_version": "3.0.0"
+        }
+    },
+    "system_info": {
+        "name": "EcoSort Industrial",
+        "description": "Sistema de Clasificación de Residuos con IA",
+        "authors": ["Gabriel Calderón", "Elias Bautista", "Cristian Hernandez"],
+        "location": "Industrial Site"
+    },
     "logging_level": "INFO",
     "system_settings": {
         "save_images": true,
+        "image_format": "jpg",
+        "image_quality": 85,
         "auto_cleanup": true,
         "data_retention_days": 30,
         "generate_final_report": true,
         "bin_check_interval_s": 30,
-        "prompt_on_plc_failure": true
+        "max_processing_errors": 10,
+        "error_recovery_enabled": true,
+        "performance_monitoring": true,
+        "debug_mode": false,
+        "simulation_mode": false,
+        "auto_restart_on_error": true,
+        "max_restart_attempts": 3,
+        "restart_delay_s": 5,
+        "data_retention": {
+            "log_retention_days": 30,
+            "image_retention_days": 7,
+            "metrics_retention_days": 90,
+            "auto_cleanup": true
+        },
+        "performance": {
+            "max_memory_usage_percent": 85,
+            "max_cpu_usage_percent": 80,
+            "max_temperature_celsius": 75,
+            "disk_space_warning_gb": 2,
+            "monitoring_interval_s": 10
+        }
     },
     "camera_settings": {
         "index": 0,
-        "frame_width": 1280,
-        "frame_height": 720,
-        "autofocus": false,
-        "exposure": -6
+        "frame_width": 640,
+        "frame_height": 480,
+        "fps": 30,
+        "brightness": 0.5,
+        "contrast": 0.5,
+        "saturation": 0.5,
+        "exposure": -5,
+        "autofocus": true,
+        "warmup_frames": 10,
+        "backup_cameras": [1, 2],
+        "auto_recovery": true,
+        "capture_format": "BGR",
+        "roi": {
+            "enabled": false,
+            "x": 0,
+            "y": 0,
+            "width": 640,
+            "height": 480
+        }
     },
     "ai_model_settings": {
-        "model_path": "IA_Clasificacion/models/best.pt",
-        "class_names": ["metal", "plastic", "glass", "carton", "other"],
-        "min_confidence": 0.55
+        "model_path": "IA_Clasificacion/best_ecosort_640.pt",
+        "backup_model_path": "IA_Clasificacion/backup_model.pt",
+        "min_confidence": 0.5,
+        "max_detections": 10,
+        "inference_device": "cpu",
+        "model_type": "yolov8",
+        "input_size": [640, 640],
+        "preprocessing": {
+            "normalize": true,
+            "mean": [0.485, 0.456, 0.406],
+            "std": [0.229, 0.224, 0.225]
+        },
+        "postprocessing": {
+            "nms_threshold": 0.45,
+            "score_threshold": 0.25
+        },
+        "class_names": [
+            "metal",
+            "plastic",
+            "glass",
+            "carton",
+            "other"
+        ],
+        "class_mapping": {
+            "metal": "metal",
+            "plastico": "plastic",
+            "vidrio": "glass",
+            "carton": "carton",
+            "papel": "carton",
+            "otros": "other",
+            "unknown": "other"
+        },
+        "fallback_category": "other",
+        "performance_monitoring": {
+            "log_inference_times": true,
+            "max_inference_time_ms": 1000,
+            "alert_on_slow_inference": true
+        }
     },
     "conveyor_belt_settings": {
-        "control_mode": "plc",
-        "belt_speed_mps": 0.2,
+        "control_mode": "pwm_dc_motor",
+        "belt_speed_mps": 0.15,
+        "belt_length_m": 2.0,
+        "belt_width_m": 0.5,
         "camera_trigger_pin_bcm": 17,
         "trigger_debounce_s": 0.1,
         "distance_camera_to_diverters_m": {
-            "metal": 0.5,
-            "plastic": 0.7,
-            "glass": 0.9,
-            "carton": 1.1
+            "metal": 0.6,
+            "plastic": 0.8,
+            "glass": 1.0,
+            "carton": 1.2
         },
         "diverter_activation_duration_s": 0.75,
-        "trigger_to_diverter_delay_ms": 1000,
-        "diverter_activation_duration_ms": 750,
         "default_speed_percent": 75,
         "motor_pin_bcm": 19,
         "enable_pin_bcm": 26,
@@ -41,71 +130,378 @@
         "active_state_on": "HIGH",
         "pwm_frequency_hz": 100,
         "min_duty_cycle": 30,
-        "max_duty_cycle": 100
-    },
-    "plc_settings": {
-        "ip_address": "192.168.1.100",
-        "port": 502,
-        "unit_id": 1
+        "max_duty_cycle": 100,
+        "acceleration_time_s": 2.0,
+        "deceleration_time_s": 1.5,
+        "emergency_stop_pin_bcm": 27,
+        "belt_status_led_pin_bcm": 22,
+        "direction": "forward",
+        "motor_type": "stepper",
+        "emergency_stop_time_s": 0.5,
+        "sensor_positions_m": {
+            "camera_trigger": 0.2,
+            "end_sensor": 1.8
+        },
+        "maintenance": {
+            "max_runtime_hours": 8,
+            "maintenance_interval_hours": 24,
+            "belt_wear_monitoring": true
+        }
     },
     "sensors_settings": {
         "camera_trigger_sensor": {
-            "pin_bcm": 17,
-            "trigger_on_state": "LOW",
-            "pull_up_down": "PUD_UP",
-            "debounce_s": 0.1
+            "pin_bcm": 18,
+            "trigger_mode": "rising_edge",
+            "debounce_time_ms": 50,
+            "sensitivity": "medium",
+            "enabled": true,
+            "backup_pin": 19
         },
         "bin_level_sensors": {
+            "enabled": true,
+            "update_interval_s": 10,
             "settings_common": {
-                "sound_speed_cm_s": 34300,
-                "readings_per_measurement": 5,
-                "measurement_timeout_s": 0.1,
-                "reading_interval_s": 0.05,
-                "use_temperature_compensation": true,
-                "default_temperature_c": 22.5,
-                "stabilization_time_s": 0.2,
-                "full_threshold_percent": 80.0
+                "trigger_pin_bcm": 24,
+                "echo_pin_bcm": 25,
+                "max_distance_cm": 200,
+                "measurement_timeout_s": 1.0,
+                "full_threshold_percent": 80.0,
+                "critical_threshold_percent": 95.0,
+                "smoothing_samples": 3
             },
-            "bins": {
-                "metal": {
-                    "trig_pin_bcm": 23,
-                    "echo_pin_bcm": 24,
-                    "bin_depth_cm": 50.0
+            "sensors": {
+                "metal_bin": {
+                    "trigger_pin_bcm": 24,
+                    "echo_pin_bcm": 25,
+                    "empty_distance_cm": 180,
+                    "full_distance_cm": 20,
+                    "enabled": true,
+                    "calibration_offset_cm": 0
                 },
-                "plastic": {
-                    "trig_pin_bcm": 25,
-                    "echo_pin_bcm": 8,
-                    "bin_depth_cm": 40.0
+                "plastic_bin": {
+                    "trigger_pin_bcm": 26,
+                    "echo_pin_bcm": 27,
+                    "empty_distance_cm": 180,
+                    "full_distance_cm": 20,
+                    "enabled": true,
+                    "calibration_offset_cm": 0
                 },
-                "glass": {
-                    "trig_pin_bcm": 5,
+                "glass_bin": {
+                    "trigger_pin_bcm": 22,
+                    "echo_pin_bcm": 23,
+                    "empty_distance_cm": 180,
+                    "full_distance_cm": 20,
+                    "enabled": true,
+                    "calibration_offset_cm": 0
+                },
+                "carton_bin": {
+                    "trigger_pin_bcm": 5,
                     "echo_pin_bcm": 6,
-                    "bin_depth_cm": 45.0
-                },
-                "carton": {
-                    "trig_pin_bcm": 12,
-                    "echo_pin_bcm": 16,
-                    "bin_depth_cm": 60.0
+                    "empty_distance_cm": 180,
+                    "full_distance_cm": 20,
+                    "enabled": true,
+                    "calibration_offset_cm": 0
                 }
+            }
+        },
+        "environmental": {
+            "temperature_sensor": {
+                "enabled": false,
+                "pin_bcm": 4,
+                "type": "DS18B20",
+                "alert_threshold_celsius": 70
+            },
+            "vibration_sensor": {
+                "enabled": false,
+                "pin_bcm": 17,
+                "sensitivity": "medium"
+            }
+        },
+        "safety": {
+            "emergency_stop": {
+                "enabled": true,
+                "pin_bcm": 21,
+                "normally_closed": true,
+                "debounce_time_ms": 10
+            },
+            "light_curtain": {
+                "enabled": false,
+                "pin_bcm": 20,
+                "beam_break_action": "pause"
             }
         }
     },
     "diverter_control_settings": {
-        "type": "PLC_Modbus",
-        "common_motor_params": {},
+        "type": "RPi_GPIO",
+        "global_enable_pin_bcm": null,
+        "safety_interlocks": true,
+        "position_feedback": false,
+        "common_motor_params": {
+            "step_delay": 0.002,
+            "use_ramping": true,
+            "ramping_start_delay": 0.005,
+            "ramping_min_delay": 0.001,
+            "ramping_accel_steps": 50,
+            "use_enable_pin": true,
+            "home_on_init": false,
+            "error_recovery_attempts": 3
+        },
         "diverters": {
             "metal": {
-                "plc_register_id": 0
+                "type": "stepper_A4988",
+                "dir_pin_bcm": 2,
+                "step_pin_bcm": 3,
+                "enable_pin_bcm": 4,
+                "steps_per_activation": 200,
+                "activation_direction": "clockwise",
+                "return_to_home": true,
+                "home_steps": 0,
+                "enabled": true,
+                "maintenance": {
+                    "max_operations": 10000,
+                    "current_operations": 0,
+                    "last_maintenance": null
+                }
             },
             "plastic": {
-                "plc_register_id": 1
+                "type": "stepper_A4988",
+                "dir_pin_bcm": 14,
+                "step_pin_bcm": 15,
+                "enable_pin_bcm": 18,
+                "steps_per_activation": 200,
+                "activation_direction": "clockwise",
+                "return_to_home": true,
+                "home_steps": 0,
+                "enabled": true,
+                "maintenance": {
+                    "max_operations": 10000,
+                    "current_operations": 0,
+                    "last_maintenance": null
+                }
             },
             "glass": {
-                "plc_register_id": 2
+                "type": "gpio_on_off",
+                "pin_bcm": 7,
+                "active_state": "HIGH",
+                "activation_duration_s": 0.5,
+                "enabled": true,
+                "maintenance": {
+                    "max_operations": 50000,
+                    "current_operations": 0,
+                    "last_maintenance": null
+                }
             },
             "carton": {
-                "plc_register_id": 3
+                "type": "gpio_on_off",
+                "pin_bcm": 8,
+                "active_state": "HIGH",
+                "activation_duration_s": 0.5,
+                "enabled": true,
+                "maintenance": {
+                    "max_operations": 50000,
+                    "current_operations": 0,
+                    "last_maintenance": null
+                }
             }
+        },
+        "global_settings": {
+            "simultaneous_activations": false,
+            "activation_queue_size": 100,
+            "timeout_between_activations_ms": 100,
+            "fault_tolerance": {
+                "max_consecutive_failures": 5,
+                "failure_recovery_delay_s": 1.0,
+                "auto_disable_on_fault": true
+            }
+        }
+    },
+    "database_settings": {
+        "enabled": true,
+        "type": "sqlite",
+        "database_path": "InterfazUsuario_Monitoreo/ecosort_data.db",
+        "backup": {
+            "enabled": true,
+            "interval_hours": 6,
+            "backup_path": "backups/",
+            "max_backups": 10,
+            "compress": true
+        },
+        "maintenance": {
+            "vacuum_interval_days": 7,
+            "analyze_interval_days": 1,
+            "max_database_size_mb": 1000
+        },
+        "connection": {
+            "timeout_s": 30,
+            "retry_attempts": 3,
+            "retry_delay_s": 1
+        }
+    },
+    "api_settings": {
+        "enabled": true,
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": false,
+        "threaded": true,
+        "security": {
+            "api_key_required": false,
+            "api_keys": [],
+            "rate_limiting": {
+                "enabled": true,
+                "requests_per_minute": 100,
+                "burst_limit": 20
+            },
+            "cors": {
+                "enabled": true,
+                "origins": ["*"],
+                "methods": ["GET", "POST", "PUT", "DELETE"],
+                "headers": ["*"]
+            }
+        },
+        "ssl": {
+            "enabled": false,
+            "cert_file": "",
+            "key_file": ""
+        },
+        "logging": {
+            "log_requests": true,
+            "log_responses": false,
+            "log_errors": true
+        }
+    },
+    "monitoring_settings": {
+        "performance_monitoring": {
+            "enabled": true,
+            "metrics_interval_s": 10,
+            "history_retention_points": 1000,
+            "alerts": {
+                "cpu_threshold_percent": 80,
+                "memory_threshold_percent": 85,
+                "temperature_threshold_celsius": 70,
+                "processing_time_threshold_ms": 5000,
+                "error_rate_threshold_percent": 10
+            }
+        },
+        "health_checks": {
+            "enabled": true,
+            "interval_s": 30,
+            "components": [
+                "camera",
+                "ai_model",
+                "database",
+                "sensors",
+                "actuators"
+            ],
+            "timeout_s": 5
+        },
+        "notifications": {
+            "enabled": false,
+            "email": {
+                "smtp_server": "",
+                "smtp_port": 587,
+                "username": "",
+                "password": "",
+                "from_address": "",
+                "to_addresses": [],
+                "alert_levels": ["critical", "warning"]
+            },
+            "webhook": {
+                "url": "",
+                "enabled": false,
+                "alert_levels": ["critical"]
+            }
+        }
+    },
+    "safety_settings": {
+        "emergency_stop_enabled": true,
+        "max_failed_attempts": 5,
+        "lockout_duration_minutes": 30,
+        "safety_interlocks": {
+            "enabled": true,
+            "door_sensor": {
+                "enabled": false,
+                "pin_bcm": 16,
+                "action": "pause"
+            },
+            "maintenance_mode": {
+                "require_key": false,
+                "auto_timeout_minutes": 60
+            }
+        },
+        "operational_limits": {
+            "max_continuous_runtime_hours": 12,
+            "max_objects_per_hour": 3600,
+            "max_temperature_celsius": 75,
+            "min_bin_space_percent": 5
+        }
+    },
+    "calibration_settings": {
+        "camera": {
+            "last_calibration": null,
+            "calibration_interval_days": 30,
+            "auto_calibration": false,
+            "calibration_images_required": 20
+        },
+        "sensors": {
+            "last_calibration": null,
+            "calibration_interval_days": 7,
+            "auto_calibration": true,
+            "reference_measurements": {}
+        },
+        "actuators": {
+            "last_calibration": null,
+            "calibration_interval_days": 14,
+            "auto_calibration": false,
+            "positioning_tolerance": 2
+        },
+        "belt_speed": {
+            "last_calibration": null,
+            "calibration_interval_days": 7,
+            "auto_calibration": true,
+            "reference_distance_m": 1.0,
+            "tolerance_percent": 5
+        }
+    },
+    "logging": {
+        "level": "INFO",
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s",
+        "handlers": {
+            "file": {
+                "enabled": true,
+                "filename": "logs/ecosort.log",
+                "max_size_mb": 10,
+                "backup_count": 5,
+                "rotation": "size"
+            },
+            "console": {
+                "enabled": true,
+                "level": "INFO"
+            },
+            "syslog": {
+                "enabled": false,
+                "address": "localhost",
+                "port": 514,
+                "facility": "local0"
+            }
+        },
+        "component_levels": {
+            "main_sistema_banda": "INFO",
+            "ai_detector": "INFO",
+            "motor_driver": "INFO",
+            "sensor_interface": "INFO",
+            "database": "WARNING",
+            "api": "WARNING"
+        }
+    },
+    "development": {
+        "debug_mode": false,
+        "simulation_mode": false,
+        "test_mode": false,
+        "mock_hardware": false,
+        "verbose_logging": false,
+        "profiling": {
+            "enabled": false,
+            "output_file": "performance_profile.prof"
         }
     }
 }

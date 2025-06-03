@@ -179,15 +179,7 @@ def start_belt(speed_percent=None):
             logger.info(f"Banda (PWM) encendida a {target_speed}% velocidad ({actual_duty_cycle:.1f}% duty cycle).")
             return True
     
-    elif control_type == "external_plc":
-        # TODO: Implementar comunicación con PLC para encender la banda
-        # Ejemplo: rpi_plc_interface.send_belt_command("START", speed_percent)
-        is_running = True # Asumir que el comando fue exitoso
-        current_speed_percent = speed_percent if speed_percent is not None else 100
-        logger.info(f"Comando de encendido de banda enviado a PLC (velocidad: {current_speed_percent}%).")
-        return True
-        
-    logger.warning("No se pudo encender la banda, configuración o tipo de control no válidos.")
+    logger.warning("No se pudo encender la banda, configuración o tipo de control no válidos (asegúrate que no sea 'external_plc').")
     return False
 
 def stop_belt():
@@ -212,11 +204,6 @@ def stop_belt():
         if pwm_instance:
             pwm_instance.ChangeDutyCycle(0)
             
-    elif control_type == "external_plc":
-        # TODO: Implementar comunicación con PLC para detener la banda
-        # Ejemplo: rpi_plc_interface.send_belt_command("STOP")
-        logger.info("Comando de detención de banda enviado a PLC.")
-
     # Deshabilitar driver si existe un pin de enable
     if enable_pin is not None:
         GPIO.output(enable_pin, GPIO.LOW) # Asumir que LOW deshabilita
