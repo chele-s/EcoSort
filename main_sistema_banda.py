@@ -1069,8 +1069,8 @@ class ComponentManager:
     async def _initialize_database_and_api(self) -> None:
         """Inicializa la base de datos y API con manejo de errores mejorado"""
         try:
-            from InterfazUsuario_Monitoreo.Backend.database import DatabaseManager
-            from InterfazUsuario_Monitoreo.Backend.api import create_api
+            from InterfazUsuario_Monitoreo.Backend.database_enhanced import DatabaseManagerEnhanced
+            from InterfazUsuario_Monitoreo.Backend.api_enhanced import create_api
             
             # Inicializar base de datos
             try:
