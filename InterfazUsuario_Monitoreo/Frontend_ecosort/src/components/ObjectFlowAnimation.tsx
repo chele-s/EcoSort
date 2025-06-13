@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { animate, utils, createTimeline } from 'animejs';
 import styles from './ObjectFlowAnimation.module.css';
 import type { ClassificationData } from '../types/socket';
 
@@ -25,8 +25,8 @@ const ObjectFlowAnimation: React.FC<ObjectFlowAnimationProps> = ({ newClassifica
 
     // Belt animation
     useEffect(() => {
-        anime({
-            targets: beltRef.current,
+        if (!beltRef.current) return;
+        animate(beltRef.current, {
             backgroundPosition: '-200px 0px',
             duration: 2000,
             easing: 'linear',
@@ -59,22 +59,22 @@ const ObjectFlowAnimation: React.FC<ObjectFlowAnimationProps> = ({ newClassifica
         const endX = (animation_data.end_position.x / 100) * containerWidth;
         const endY = (animation_data.end_position.y / 100) * containerHeight;
 
-        anime.timeline({
-            targets: objectEl,
-            complete: () => {
+        const tl = createTimeline({
+            onComplete: () => {
                 objectEl.remove();
             }
-        })
-        .add({
+        });
+
+        tl.add(objectEl, {
             translateX: [startX, diversionPointX],
             translateY: [startY, diversionPointY],
             opacity: [0, 1],
             scale: [0, 1.2, 1],
-            rotate: [() => anime.random(-360, 360), () => anime.random(-360, 360)],
+            rotate: [() => utils.random(-360, 360), () => utils.random(-360, 360)],
             duration: 2000,
             easing: 'easeInQuad'
         })
-        .add({
+        .add(objectEl, {
             translateX: [diversionPointX, endX],
             translateY: [diversionPointY, endY],
             opacity: [1, 0],

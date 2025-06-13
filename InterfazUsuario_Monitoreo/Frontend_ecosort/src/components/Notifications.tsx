@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { animate } from 'animejs';
 import styles from './Notifications.module.css';
 import type { NotificationData, CriticalAlertData } from '../types/socket';
 
@@ -14,8 +14,7 @@ const Notifications: React.FC<NotificationsProps> = ({ notification, onClear }) 
   useEffect(() => {
     if (notification && notificationRef.current) {
       // Entrance animation
-      anime({
-        targets: notificationRef.current,
+      animate(notificationRef.current, {
         translateX: ['100%', '0%'],
         opacity: [0, 1],
         duration: 500,
@@ -26,8 +25,7 @@ const Notifications: React.FC<NotificationsProps> = ({ notification, onClear }) 
       const timer = setTimeout(() => {
         if (notificationRef.current) {
           // Exit animation
-          anime({
-            targets: notificationRef.current,
+          animate(notificationRef.current, {
             translateX: ['0%', '100%'],
             opacity: [1, 0],
             duration: 500,

@@ -1,10 +1,78 @@
 .dashboard {
-  animation: fadeIn 0.5s ease-out;
+  padding: var(--spacing-8);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Sistemas de efectos de fondo */
+.particleSystem {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.particle {
+  will-change: transform, opacity, scale;
+  filter: blur(0.5px);
+}
+
+.backgroundEffects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.quantumWave {
+  will-change: transform, opacity, scale;
+  filter: blur(1px);
+}
+
+/* Grid holográfico */
+.holoGrid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -3;
+  opacity: 0.3;
+}
+
+.holoLine {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,255,200,0.4) 30%,
+    rgba(0,255,200,0.8) 50%,
+    rgba(0,255,200,0.4) 70%,
+    transparent 100%
+  );
+  animation: holoGlow 3s ease-in-out infinite;
+}
+
+@keyframes holoGlow {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 0.8; transform: scaleY(1.2); }
 }
 
 .header {
@@ -16,18 +84,20 @@
 
 .title {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-text-primary);
+}
+
+.titleGlow {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  opacity: 0.9;
 }
 
 .mainGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
   gap: var(--spacing-6);
-  grid-template-areas: 
-    "animation animation metrics"
-    "animation animation log";
 }
 
 .card {
@@ -37,24 +107,325 @@
   padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 
 .cardTitle {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
   margin-bottom: var(--spacing-4);
   color: var(--color-text-secondary);
 }
 
 .animationCard {
-  grid-area: animation;
+  grid-column: span 2;
   min-height: 500px;
 }
 
 .metricsCard {
-  grid-area: metrics;
+  grid-column: span 1;
 }
 
 .logCard {
-  grid-area: log;
+  grid-column: span 3;
+}
+
+/* Indicadores de energía cuántica */
+.quantumIndicators {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.quantumBar {
+  width: 3px;
+  background: linear-gradient(
+    to top,
+    #00a8ff 0%,
+    #00ff88 50%,
+    #ff0088 100%
+  );
+  border-radius: 2px;
+  opacity: 0.7;
+  animation: quantumPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes quantumPulse {
+  0%, 100% { 
+    transform: scaleY(0.3);
+    filter: brightness(0.8);
+  }
+  50% { 
+    transform: scaleY(1);
+    filter: brightness(1.5);
+  }
+}
+
+/* Visualizador de ondas de datos */
+.dataVisualizer {
+  margin-top: auto; /* Pushes the visualizer to the bottom */
+  padding-top: var(--spacing-4);
+}
+
+.waveChart {
+  width: 100%;
+  height: 60px;
+}
+
+.wavePath {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Pulso de actividad neural */
+.neuralPulse {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(0,255,100,0.6);
+  border-radius: 50%;
+  animation: neuralPulse 2s ease-out infinite;
+}
+
+.pulse:nth-child(2) { animation-delay: 0.7s; }
+.pulse:nth-child(3) { animation-delay: 1.4s; }
+
+@keyframes neuralPulse {
+  0% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Elementos decorativos futuristas */
+.futuristicElements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.orbitingRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  border: 1px solid rgba(0,255,200,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: orbit 20s linear infinite;
+}
+
+.orbitingRing::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #00ff88;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px currentColor;
+}
+
+@keyframes orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.energyField {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(255,0,168,0.1) 0%,
+    rgba(0,255,200,0.1) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: energyPulse 4s ease-in-out infinite;
+}
+
+@keyframes energyPulse {
+  0%, 100% { 
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.quantumVortex {
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  width: 150px;
+  height: 150px;
+  border: 2px solid transparent;
+  border-top: 2px solid rgba(0,168,255,0.6);
+  border-radius: 50%;
+  animation: vortexSpin 3s linear infinite;
+}
+
+@keyframes vortexSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Efectos de partículas especiales */
+.shockwave {
+  will-change: transform, opacity;
+  animation: shockwaveExpand 2.5s ease-out;
+}
+
+@keyframes shockwaveExpand {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(20);
+    opacity: 0;
+  }
+}
+
+.quantumConfetti {
+  will-change: transform, opacity;
+}
+
+.emergencyOverlay {
+  will-change: opacity, transform;
+}
+
+/* Red neuronal para pantallas de alto rendimiento */
+.neuralNetwork {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  padding: 40px;
+}
+
+.neuron {
+  width: 8px;
+  height: 8px;
+  background: rgba(0,255,200,0.6);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor;
+  animation: neuronPulse 3s ease-in-out infinite;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes neuronPulse {
+  0%, 100% { 
+    transform: scale(0.5);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .animationCard,
+  .metricsCard,
+  .logCard {
+    grid-column: span 1;
+  }
+  
+  .quantumIndicators {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .animationCard {
+    min-height: 300px;
+  }
+  
+  .holoGrid {
+    display: none;
+  }
+  
+  .futuristicElements {
+    display: none;
+  }
+}
+
+/* Modo de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .particle,
+  .quantumWave,
+  .holoLine {
+    display: none;
+  }
+}
+
+/* Efectos de alto contraste */
+@media (prefers-contrast: high) {
+  .card {
+    border-color: #ffffff;
+    background: rgba(0,0,0,0.9);
+  }
+  
+  .title {
+    color: #ffffff;
+    text-shadow: none;
+  }
 } 

@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "animejs": "^3.2.2",
+    "animejs": "^4.0.2",
     "chart.js": "^4.4.3",
     "react": "^19.1.0",
     "react-chartjs-2": "^5.2.0",

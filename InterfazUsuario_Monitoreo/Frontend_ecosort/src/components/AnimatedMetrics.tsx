@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { animate } from 'animejs';
 import styles from './AnimatedMetrics.module.css';
 import type { MetricsData } from '../types/socket';
 
@@ -16,8 +16,7 @@ const AnimatedMetrics: React.FC<AnimatedMetricsProps> = ({ metrics }) => {
         const counters = metricsRef.current.querySelectorAll('.animated-counter');
         counters.forEach(counter => {
             const targetValue = parseFloat(counter.getAttribute('data-value') || '0');
-            anime({
-                targets: counter,
+            animate(counter, {
                 innerHTML: [0, targetValue],
                 round: targetValue % 1 === 0 ? 1 : 10, // Round to integer or one decimal place
                 duration: 1000,
@@ -27,8 +26,7 @@ const AnimatedMetrics: React.FC<AnimatedMetricsProps> = ({ metrics }) => {
 
         const progressBars = metricsRef.current.querySelectorAll('.progress-bar-inner');
         progressBars.forEach(bar => {
-            anime({
-                targets: bar,
+            animate(bar, {
                 width: bar.getAttribute('data-width') + '%',
                 duration: 800,
                 easing: 'easeInOutQuad'
