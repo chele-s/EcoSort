@@ -1,0 +1,43 @@
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  background-color: var(--color-bg-tertiary);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.connected {
+  background-color: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
+}
+
+.disconnected {
+  background-color: var(--color-warning);
+  animation: pulse 1.5s infinite;
+}
+
+.statusText {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 199, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 199, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 199, 0, 0);
+  }
+} 

@@ -1,0 +1,60 @@
+.controlPage {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+}
+
+.error {
+    color: var(--color-danger);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.controlGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: var(--spacing-6);
+    grid-template-areas: 
+        "main-controls safety-controls"
+        "main-controls config-panel";
+}
+
+.mainControls { grid-area: main-controls; }
+.safetyControls { grid-area: safety-controls; }
+.configPanel { 
+    grid-area: config-panel; 
+    background-color: var(--color-bg-tertiary);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+}
+
+.panelTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-4);
+    color: var(--color-text-secondary);
+}
+
+.panelText {
+    color: var(--color-text-secondary);
+} 

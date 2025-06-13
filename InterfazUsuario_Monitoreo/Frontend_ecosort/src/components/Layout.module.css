@@ -1,0 +1,89 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-6);
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.sidebarHeader {
+  padding: var(--spacing-4) 0;
+  margin-bottom: var(--spacing-8);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-text-primary);
+  letter-spacing: -0.5px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex-grow: 1;
+}
+
+.navLink,
+.activeLink {
+  display: block;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navLink:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.activeLink {
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 168, 255, 0.2);
+}
+
+.sidebarFooter {
+  margin-top: auto;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--color-warning);
+  background-color: rgba(255, 199, 0, 0.1);
+  border: 1px solid rgba(255, 199, 0, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 199, 0, 0.2);
+  color: #ffc700;
+  border-color: rgba(255, 199, 0, 0.4);
+}
+
+
+.mainContent {
+  flex-grow: 1;
+  margin-left: 260px;
+  padding: var(--spacing-12) var(--spacing-8);
+  overflow-y: auto;
+} 
