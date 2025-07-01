@@ -66,7 +66,7 @@ class ModelConfiguration:
     model_path: str = 'models/best.pt'
     model_type: str = "yolov12"  # Default a YOLOv12
     min_confidence: float = 0.5
-    class_names: List[str] = field(default_factory=lambda: ['Metal', 'Glass', 'Plastic', 'Carton'])
+    class_names: List[str] = field(default_factory=lambda: ['Metal', 'Plastic', 'Carton', 'others'])
     input_size: Tuple[int, int] = (640, 640)
     use_flash_attention: bool = False  # Nueva opción para YOLOv12
     device: str = "auto"  # auto, cpu, cuda, mps

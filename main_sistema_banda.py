@@ -29,6 +29,7 @@ from collections import deque
 from datetime import datetime, timedelta
 from contextlib import asynccontextmanager
 import RPi.GPIO as GPIO
+from Control_Banda.RPi_control_bajo_nivel.motor_driver_interface import ActuatorState
 
 # Configuración de logging estructurado con rotación
 from logging.handlers import RotatingFileHandler
@@ -798,6 +799,7 @@ class ComponentManager:
         self.ai_detector = None
         self.database = None
         self.api_server = None
+        self.diverter_manager = None
         self.error_recovery: Optional[ErrorRecoveryManager] = None
         self.security_manager: Optional[SecurityManager] = None
         self.performance_monitor: Optional[PerformanceMonitor] = None
@@ -937,6 +939,8 @@ class ComponentManager:
                 raise HardwareError("Error configurando GPIOs de desviadores", 
                                   ErrorSeverity.HIGH, 'diverters')
             
+            self.diverter_manager = motor_driver_interface.get_diverter_manager()
+            
             logger.info("Hardware inicializado correctamente")
             
         except ImportError as e:
@@ -1074,7 +1078,7 @@ class ComponentManager:
             
             # Inicializar base de datos
             try:
-                self.database = DatabaseManager()
+                self.database = DatabaseManagerEnhanced()
                 
                 # Verificar conexión
                 self.database.log_system_event('startup', 'info', 'Sistema EcoSort v2.1 iniciado')
@@ -1968,12 +1972,12 @@ class EcoSortSystem:
     
     def _get_fallback_category(self, system_class_names: List[str]) -> str:
         """Obtiene categoría de fallback para objetos no reconocidos"""
-        if 'other' in system_class_names:
-            return 'other'
+        if 'others' in system_class_names:
+            return 'others'
         elif 'Desconocido' in system_class_names:
             return 'Desconocido'
         else:
-            return 'other'  # Fallback por defecto
+            return 'others'  # Fallback por defecto
     
     def _get_category_index(self, category_name: str, system_class_names: List[str], default: int = -1) -> int:
         """Obtiene el índice de una categoría"""
@@ -2040,7 +2044,7 @@ class EcoSortSystem:
             # Verificar si requiere desviación
             distances = self.config.get('conveyor_belt_settings', 'distance_camera_to_diverters_m', {})
             
-            if category_name.lower() == 'other' or category_name not in distances:
+            if category_name.lower() == 'others' or category_name not in distances:
                 self.logger.info(f"Objeto {object_id} ({category_name}) no requiere desviación")
                 if self.components.database:
                     try:
@@ -2066,7 +2070,7 @@ class EcoSortSystem:
                 return
             
             # Verificar que el desviador esté disponible
-            if hasattr(self.components, 'diverter_manager'):
+            if self.components.diverter_manager:
                 diverter_status = self.components.diverter_manager.get_diverter_status(category_name)
                 if diverter_status and diverter_status.state not in [ActuatorState.IDLE, ActuatorState.DISABLED]:
                     self.logger.warning(f"Desviador {category_name} ocupado, omitiendo objeto {object_id}")
