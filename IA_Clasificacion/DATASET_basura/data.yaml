@@ -4,4 +4,4 @@ test: images/test
 
 # Classes
 nc: 4
-names: ['Metal', 'Plastic', 'Carton', 'Other'] 
+names: ['Carton', 'Metal', 'Plastic', 'Other'] 

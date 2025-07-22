@@ -54,3 +54,15 @@ exports/
 config_industrial_test.json
 config_industrial_belt_test.json
 config_industrial_sensors_test.json 
+
+#Datasets
+DATASET_basura/
+dataset_basura_2/
+dataset_basura_3/
+dataset_basura_4/
+dataset_basura_5/
+dataset_basura_6/
+dataset_basura_7/
+dataset_basura_8/
+dataset_basura_9/
+IA_Clasificacion/DATASET_basura.rar
